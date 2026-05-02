@@ -45,7 +45,3 @@ echo "🚀 Pushing to origin/$BRANCH..."
 git push origin $BRANCH
 
 echo "✅ Sync complete! Local and remote are up to date."
-<<<<<<< Updated upstream
-=======
-   
->>>>>>> Stashed changes
