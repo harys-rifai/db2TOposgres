@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #!/bin/bash
 # Git safe sync script: handle local changes, remote updates, conflicts
 BRANCH=${1:-main}   # default branch = main, bisa diganti saat run
@@ -38,4 +39,7 @@ echo "✅ Sync complete! Local and remote are up to date."
 <<<<<<< Updated upstream
 =======
    
+>>>>>>> Stashed changes
+=======
+ #ssss
 >>>>>>> Stashed changes
