@@ -1,0 +1,7 @@
+/target/
+/.classpath
+/.project
+/db2pg.config
+/queries.xml
+/logs/
+/bin/
