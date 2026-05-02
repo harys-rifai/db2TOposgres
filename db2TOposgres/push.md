@@ -16,6 +16,7 @@ git commit -m "Initial commitw"
 # 6. Push to GitHub
 git push -u origin main
 
+git log --oneline --decorate --graph --all
 
 rm -rf MigrationDB-DB2PG/.git
 rm -rf dispatcher_pg/.git
