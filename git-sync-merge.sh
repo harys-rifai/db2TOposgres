@@ -1,28 +1,26 @@
 #!/bin/bash
-# Auto sync script: pull remote changes, merge with local, commit, push
+# Sync local changes with remote (handles new files on remote)
 
-BRANCH=${1:-main}   # default branch = main, bisa diganti saat run
+BRANCH=${1:-main}
 
-echo "🔄 Fetching latest changes from origin/$BRANCH..."
-git fetch origin $BRANCH
-
-echo "📥 Pulling remote changes..."
-git pull origin $BRANCH --rebase
-
-# Jika ada konflik, Git akan berhenti di sini.
-# Kamu harus resolve manual, lalu lanjutkan dengan:
-#   git add .
-#   git rebase --continue
-
-echo "📂 Adding all local changes..."
+echo "🔄 Staging local changes..."
 git add .
 
-# Commit otomatis dengan timestamp
 COMMIT_MSG="Auto commit on $(date '+%Y-%m-%d %H:%M:%S')"
-echo "📝 Committing with message: $COMMIT_MSG"
-git commit -m "$COMMIT_MSG"
+git commit -m "$COMMIT_MSG" || echo "ℹ️ No local changes to commit."
+
+echo "📥 Rebasing onto origin/$BRANCH..."
+git pull origin $BRANCH --rebase
+
+if [ $? -ne 0 ]; then
+  echo "⚠️ Rebase conflict detected. Resolve manually:"
+  echo "   git status"
+  echo "   git add <fixed-files>"
+  echo "   git rebase --continue"
+  exit 1
+fi
 
 echo "🚀 Pushing to origin/$BRANCH..."
 git push origin $BRANCH
 
-echo "✅ Sync complete! Local and remote are merged."
+echo "✅ Sync complete!"
